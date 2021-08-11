@@ -423,6 +423,7 @@ class Engine(object):
         global final_result_of_torchreid_vector
         final_result_of_torchreid_vector = []
         query, gallery = self.datamanager.fetch_test_loaders(dataset_name)
+        num_q, num_g = distmat.shape
         assert num_q == len(query)
         assert num_g == len(gallery)
         indices = np.argsort(distmat, axis=1)
@@ -442,7 +443,8 @@ class Engine(object):
           temp_gimg_path_vector = np.array(temp_gimg_path_vector)
           final_result_of_torchreid_vector.append(tuple([qimg_path, temp_gimg_path_vector]))
         final_result_of_torchreid_vector = np.array(final_result_of_torchreid_vector)
-
+        
+        print("My testing of final_result_of_torchreid_vector")
         print(final_result_of_torchreid_vector[0])
         # ~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
