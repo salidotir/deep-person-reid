@@ -116,7 +116,6 @@ def visualize_ranked_results(
 
             print("________________")
             print(q_idx, g_idx)
-            print(gallery.shape)
             print("________________")
 
             # # write to csv
