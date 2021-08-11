@@ -422,6 +422,7 @@ class Engine(object):
 
         # ~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
         query, gallery = self.datamanager.fetch_test_loaders(dataset_name)
+        num_q, num_g = distmat.shape
         assert num_q == len(query)
         assert num_g == len(gallery)
         indices = np.argsort(distmat, axis=1)
