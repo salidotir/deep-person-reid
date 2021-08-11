@@ -75,6 +75,7 @@ def visualize_ranked_results(
             )
             shutil.copy(src, dst)
 
+    # with open('/content/drive/My Drive/output.csv','w') as out:
     for q_idx in range(num_q):
         qimg_path, qpid, qcamid = query[q_idx][:3]
         qimg_path_name = qimg_path[0] if isinstance(
@@ -114,7 +115,8 @@ def visualize_ranked_results(
             temp_gimg_path_vector.append([gimg_path, invalid])
 
             print("________________")
-            print(gimg_path, gpid, gcamid)
+            print(q_idx, g_idx)
+            print(gallery.shape)
             print("________________")
 
             # # write to csv
