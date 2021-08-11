@@ -420,34 +420,34 @@ class Engine(object):
         for r in ranks:
             print('Rank-{:<3}: {:.1%}'.format(r, cmc[r - 1]))
 
-        # ~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
-        query, gallery = self.datamanager.fetch_test_loaders(dataset_name)
-        num_q, num_g = distmat.shape
-        assert num_q == len(query)
-        assert num_g == len(gallery)
-        indices = np.argsort(distmat, axis=1)
+        # # ~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+        # query, gallery = self.datamanager.fetch_test_loaders(dataset_name)
+        # num_q, num_g = distmat.shape
+        # assert num_q == len(query)
+        # assert num_g == len(gallery)
+        # indices = np.argsort(distmat, axis=1)
 
-        with open('/content/drive/My Drive/output.csv','w') as out:
-            # iterating over queries
-            for q_idx in range(num_q):
-                qimg_path, qpid, qcamid = query[q_idx][:3]
-                qimg_path_name = qimg_path[0] if isinstance(
-                    qimg_path, (tuple, list)
-                ) else qimg_path
-                # iterating over result of queries
-                temp_gimg_path_vector = []
-                for g_idx in indices[q_idx, :]:
-                    gimg_path, gpid, gcamid = gallery[g_idx][:3]
-                    invalid = (qpid == gpid) & (qcamid == gcamid)
-                    temp_gimg_path_vector.append([gimg_path, invalid])
+        # with open('/content/drive/My Drive/output.csv','w') as out:
+        #     # iterating over queries
+        #     for q_idx in range(num_q):
+        #         qimg_path, qpid, qcamid = query[q_idx][:3]
+        #         qimg_path_name = qimg_path[0] if isinstance(
+        #             qimg_path, (tuple, list)
+        #         ) else qimg_path
+        #         # iterating over result of queries
+        #         temp_gimg_path_vector = []
+        #         for g_idx in indices[q_idx, :]:
+        #             gimg_path, gpid, gcamid = gallery[g_idx][:3]
+        #             invalid = (qpid == gpid) & (qcamid == gcamid)
+        #             temp_gimg_path_vector.append([gimg_path, invalid])
                 
-                # write to csv
-                for col in temp_gimg_path_vector:
-                    out.write('{0};'.format(col))
-                out.write('\n')
+        #         # write to csv
+        #         for col in temp_gimg_path_vector:
+        #             out.write('{0};'.format(col))
+        #         out.write('\n')
 
-        print("Done writing results on csv file.")
-        # ~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+        # print("Done writing results on csv file.")
+        # # ~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
         if visrank:
             visualize_ranked_results(
