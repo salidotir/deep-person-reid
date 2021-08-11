@@ -15,6 +15,7 @@ from torchreid.utils import (
 )
 from torchreid.losses import DeepSupervision
 
+import csv
 
 class Engine(object):
     r"""A generic base Engine class for both image- and video-reid.
@@ -420,32 +421,31 @@ class Engine(object):
             print('Rank-{:<3}: {:.1%}'.format(r, cmc[r - 1]))
 
         # ~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
-        global final_result_of_torchreid_vector
-        final_result_of_torchreid_vector = []
         query, gallery = self.datamanager.fetch_test_loaders(dataset_name)
-        num_q, num_g = distmat.shape
         assert num_q == len(query)
         assert num_g == len(gallery)
         indices = np.argsort(distmat, axis=1)
 
-        # iterating over queries
-        for q_idx in range(num_q):
-          qimg_path, qpid, qcamid = query[q_idx][:3]
-          qimg_path_name = qimg_path[0] if isinstance(
-              qimg_path, (tuple, list)
-          ) else qimg_path
-          # iterating over result of queries
-          temp_gimg_path_vector = []
-          for g_idx in indices[q_idx, :]:
-              gimg_path, gpid, gcamid = gallery[g_idx][:3]
-              invalid = (qpid == gpid) & (qcamid == gcamid)
-              temp_gimg_path_vector.append(tuple([gimg_path, invalid]))
-          temp_gimg_path_vector = np.array(temp_gimg_path_vector)
-          final_result_of_torchreid_vector.append(tuple([qimg_path, temp_gimg_path_vector]))
-        final_result_of_torchreid_vector = np.array(final_result_of_torchreid_vector)
-        
-        print("My testing of final_result_of_torchreid_vector")
-        print(final_result_of_torchreid_vector[0])
+        with open('/content/drive/My Drive/output.csv','w') as out:
+            # iterating over queries
+            for q_idx in range(num_q):
+                qimg_path, qpid, qcamid = query[q_idx][:3]
+                qimg_path_name = qimg_path[0] if isinstance(
+                    qimg_path, (tuple, list)
+                ) else qimg_path
+                # iterating over result of queries
+                temp_gimg_path_vector = []
+                for g_idx in indices[q_idx, :]:
+                    gimg_path, gpid, gcamid = gallery[g_idx][:3]
+                    invalid = (qpid == gpid) & (qcamid == gcamid)
+                    temp_gimg_path_vector.append([gimg_path, invalid])
+                
+                # write to csv
+                for col in temp_gimg_path_vector:
+                    out.write('{0};'.format(col))
+                out.write('\n')
+
+        print("Done writing results on csv file.")
         # ~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
         if visrank:
