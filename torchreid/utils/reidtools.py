@@ -108,12 +108,12 @@ def visualize_ranked_results(
                 mkdir_if_missing(qdir)
                 _cp_img_to(qimg_path, qdir, rank=0, prefix='query')
 
-            temp_gimg_path_vector = []
             rank_idx = 1
             for g_idx in indices[q_idx, :]:
                 gimg_path, gpid, gcamid = gallery[g_idx][:3]
                 invalid = (qpid == gpid) & (qcamid == gcamid)
 
+                temp_gimg_path_vector = []
                 temp_gimg_path_vector.append([q_idx, g_idx, invalid])
 
                 # # write to csv
