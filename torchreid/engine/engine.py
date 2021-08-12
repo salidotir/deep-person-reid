@@ -15,7 +15,7 @@ from torchreid.utils import (
 )
 from torchreid.losses import DeepSupervision
 
-# import csv
+import csv
 
 class Engine(object):
     r"""A generic base Engine class for both image- and video-reid.
@@ -341,7 +341,7 @@ class Engine(object):
                 self.writer.add_scalar(f'Test/{name}/mAP', mAP, self.epoch)
 
         return rank1
-
+        
     @torch.no_grad()
     def _evaluate(
         self,
@@ -376,6 +376,9 @@ class Engine(object):
             pids_ = np.asarray(pids_)
             camids_ = np.asarray(camids_)
             return f_, pids_, camids_
+
+        # define feature-vectors global to be used later in re-ranking
+        global qf, q_pids, q_camids, gf, g_pids, g_camids
 
         print('Extracting features from query set ...')
         qf, q_pids, q_camids = _feature_extraction(query_loader)
