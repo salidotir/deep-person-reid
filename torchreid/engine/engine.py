@@ -377,11 +377,10 @@ class Engine(object):
             camids_ = np.asarray(camids_)
             return f_, pids_, camids_
 
-        # define feature-vectors global to be used later in re-ranking
-        global qf, q_pids, q_camids, gf, g_pids, g_camids
-
         print('Extracting features from query set ...')
         qf, q_pids, q_camids = _feature_extraction(query_loader)
+        print(qf[0])
+        print(qf.shape)
         print('Done, obtained {}-by-{} matrix'.format(qf.size(0), qf.size(1)))
 
         print('Extracting features from gallery set ...')
