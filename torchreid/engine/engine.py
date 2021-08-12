@@ -408,28 +408,40 @@ class Engine(object):
         # df.to_csv("/content/drive/My Drive/qf.csv")
 
         with open('/content/drive/My Drive/qf.csv','w') as out:
-            for col in qf:
-                out.write('{0};'.format(col))
+            for row in qf:
+                for col in row:
+                    out.write('{0};'.format(col))
+                out.write('\n')
 
         with open('/content/drive/My Drive/q_pids.csv','w') as out:
-            for col in q_pids:
-                out.write('{0};'.format(col))
+            for row in q_pids:
+                for col in row:
+                    out.write('{0};'.format(col))
+                out.write('\n')                
 
         with open('/content/drive/My Drive/q_camids.csv','w') as out:
-            for col in q_camids:
-                out.write('{0};'.format(col))
+            for row in q_camids:
+                for col in row:
+                    out.write('{0};'.format(col))
+                out.write('\n')
 
         with open('/content/drive/My Drive/gf.csv','w') as out:
-            for col in gf:
-                out.write('{0};'.format(col))
+            for row in gf:
+                for col in row:
+                    out.write('{0};'.format(col))
+                out.write('\n')
 
         with open('/content/drive/My Drive/g_pids.csv','w') as out:
-            for col in g_pids:
-                out.write('{0};'.format(col))
+            for row in g_pids:
+                for col in row:
+                    out.write('{0};'.format(col))
+                out.write('\n')
 
         with open('/content/drive/My Drive/g_camids.csv','w') as out:
-            for col in g_camids:
-                out.write('{0};'.format(col))
+            for row in g_camids:
+                for col in row:
+                    out.write('{0};'.format(col))
+                out.write('\n')
 
         # ~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
