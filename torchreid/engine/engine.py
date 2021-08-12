@@ -15,7 +15,7 @@ from torchreid.utils import (
 )
 from torchreid.losses import DeepSupervision
 
-import pandas as pd
+# import pandas as pd
 import csv
 
 class Engine(object):
@@ -389,23 +389,41 @@ class Engine(object):
         # ~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
         # write qf, q_pids, q_camids, gf, g_pids, g_camids into csv files
 
-        df = pd.DataFrame({'col': qf})
-        df.to_csv("/content/drive/My Drive/qf.csv")
+        # df = pd.DataFrame({'col': qf})
+        # df.to_csv("/content/drive/My Drive/qf.csv")
 
-        df = pd.DataFrame({'col': q_pids})
-        df.to_csv("/content/drive/My Drive/qf.csv")
+        # df = pd.DataFrame({'col': q_pids})
+        # df.to_csv("/content/drive/My Drive/qf.csv")
 
-        df = pd.DataFrame({'col': q_camids})
-        df.to_csv("/content/drive/My Drive/qf.csv")
+        # df = pd.DataFrame({'col': q_camids})
+        # df.to_csv("/content/drive/My Drive/qf.csv")
 
-        df = pd.DataFrame({'col': gf})
-        df.to_csv("/content/drive/My Drive/qf.csv")
+        # df = pd.DataFrame({'col': gf})
+        # df.to_csv("/content/drive/My Drive/qf.csv")
 
-        df = pd.DataFrame({'col': g_pids})
-        df.to_csv("/content/drive/My Drive/qf.csv")
+        # df = pd.DataFrame({'col': g_pids})
+        # df.to_csv("/content/drive/My Drive/qf.csv")
 
-        df = pd.DataFrame({'col': g_camids})
-        df.to_csv("/content/drive/My Drive/qf.csv")
+        # df = pd.DataFrame({'col': g_camids})
+        # df.to_csv("/content/drive/My Drive/qf.csv")
+
+        for col in qf:
+            out.write('{0};'.format(col))
+
+        for col in q_pids:
+            out.write('{0};'.format(col))
+
+        for col in q_camids:
+            out.write('{0};'.format(col))
+
+        for col in gf:
+            out.write('{0};'.format(col))
+
+        for col in g_pids:
+            out.write('{0};'.format(col))
+
+        for col in g_camids:
+            out.write('{0};'.format(col))
 
         # ~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
