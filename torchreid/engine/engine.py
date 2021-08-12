@@ -15,6 +15,7 @@ from torchreid.utils import (
 )
 from torchreid.losses import DeepSupervision
 
+import pandas as pd
 import csv
 
 class Engine(object):
@@ -379,13 +380,34 @@ class Engine(object):
 
         print('Extracting features from query set ...')
         qf, q_pids, q_camids = _feature_extraction(query_loader)
-        print(qf[0])
-        print(qf.shape)
         print('Done, obtained {}-by-{} matrix'.format(qf.size(0), qf.size(1)))
 
         print('Extracting features from gallery set ...')
         gf, g_pids, g_camids = _feature_extraction(gallery_loader)
         print('Done, obtained {}-by-{} matrix'.format(gf.size(0), gf.size(1)))
+
+        # ~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+        # write qf, q_pids, q_camids, gf, g_pids, g_camids into csv files
+
+        df = pd.DataFrame({'col': qf})
+        df.to_csv("/content/drive/My Drive/qf.csv")
+
+        df = pd.DataFrame({'col': q_pids})
+        df.to_csv("/content/drive/My Drive/qf.csv")
+
+        df = pd.DataFrame({'col': q_camids})
+        df.to_csv("/content/drive/My Drive/qf.csv")
+
+        df = pd.DataFrame({'col': gf})
+        df.to_csv("/content/drive/My Drive/qf.csv")
+
+        df = pd.DataFrame({'col': g_pids})
+        df.to_csv("/content/drive/My Drive/qf.csv")
+
+        df = pd.DataFrame({'col': g_camids})
+        df.to_csv("/content/drive/My Drive/qf.csv")
+
+        # ~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
 
         print('Speed: {:.4f} sec/batch'.format(batch_time.avg))
 
